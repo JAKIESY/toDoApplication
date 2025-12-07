@@ -15,8 +15,12 @@ find_package(Qt5 COMPONENTS Core Widgets Test Sql REQUIRED)
 add_executable(toDoSystem
         main.cpp
         LoginWindow.cpp
+        TodoWindow.cpp
         log/Logger.cpp
         loginwindow.ui
+        todo.ui
+        utils/EnvPath.cpp
+        utils/EnvPath.hpp
 )
 
 target_link_libraries(toDoSystem

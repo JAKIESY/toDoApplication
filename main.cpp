@@ -1,6 +1,7 @@
 #include <QApplication>
 #include "LoginWindow.h"
 #include "log/Logger.h"
+#include "utils/EnvPath.hpp"
 #include <QDir>
 #include <QDebug>
 
@@ -8,8 +9,8 @@ int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
 
     // Initialize logger to project dir app.log
-    QString projectDir = QDir::currentPath();
-    QString logPath = projectDir + QDir::separator() + "app.log";
+    QString projectDir = QString::fromStdString(Env::projectPath());
+    QString logPath = projectDir + QDir::separator() + "data/app.log";
     if (!Logger::init(logPath)) {
         qWarning() << "Failed to initialize logger at" << logPath;
     }

@@ -1,21 +1,28 @@
 #include "LoginWindow.h"
 #include "ui_loginwindow.h"
 #include "log/Logger.h"
+#include "utils/EnvPath.hpp"
 #include <QPushButton>
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QDir>
 #include <QCryptographicHash>
 #include <QMessageBox>
+#include <QLabel>
+#include <QVBoxLayout>
+#include <QLineEdit>
+#include "TodoWindow.h"
 
 LoginWindow::LoginWindow(QWidget *parent) : QWidget(parent), ui(new Ui::LoginWindow) {
     ui->setupUi(this);
     connect(ui->loginButton, &QPushButton::clicked, this, &LoginWindow::onLoginClicked);
 
-    // set DB path to project's current working directory (user requested user.db in project dir)
-    QString projectDir = QDir::currentPath();
+    // Pressing Enter the password field should trigger the login button
+    connect(ui->passwordLineEdit, &QLineEdit::returnPressed, ui->loginButton, &QPushButton::click);
+
+    QString projectDir = QString::fromStdString(Env::projectPath());
     Logger::info(QString("Database dir: %1, sep: %2").arg(projectDir, QDir::separator()));
-    m_dbPath = projectDir + QDir::separator() + "user.db";
+    m_dbPath = projectDir + QDir::separator() + "data/db/user.db";
     Logger::info(QString("Database path: %1").arg(m_dbPath));
 
     if (!initDatabase()) {
@@ -97,6 +104,13 @@ void LoginWindow::onLoginClicked() {
         if (storedHash == providedHash) {
             Logger::info(QString("Login success for user %1").arg(user));
             QMessageBox::information(this, "Login successful", QString("Welcome, %1!").arg(user));
+
+            // Open the TodoWindow and close the login window
+            TodoWindow *todo = new TodoWindow();
+            todo->show();
+
+            this->close();
+
         } else {
             Logger::error(QString("Invalid credentials for user %1").arg(user));
             QMessageBox::warning(this, "Login failed", "Invalid username or password.");
