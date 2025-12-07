@@ -1,28 +1,26 @@
-cmake_minimum_required(VERSION 3.16)
-project(MyQt5App LANGUAGES CXX)
+cmake_minimum_required(VERSION 4.0)
+project(toDoSystem)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-# 让 Qt 自动处理 moc / uic / rcc
 set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
 
-
+# Keep user's Qt5 prefix by default; users can override CMAKE_PREFIX_PATH if needed
 set(CMAKE_PREFIX_PATH "/opt/homebrew/opt/qt@5")
 
+# Find Qt Widgets (Qt5). If you prefer Qt6, change this or set CMAKE_PREFIX_PATH accordingly.
+find_package(Qt5 COMPONENTS Core Widgets Test Sql REQUIRED)
 
-# 找 Qt5 Widgets 模块
-find_package(Qt5 COMPONENTS Widgets REQUIRED)
-
-# 可执行程序（Qt 项目）
-add_executable(MyQt5App
+add_executable(toDoSystem
         main.cpp
-        mainwindow.cpp
-        mainwindow.hpp
-        mainwindow.ui
+        LoginWindow.cpp
+        log/Logger.cpp
+        loginwindow.ui
 )
 
-# 链接 Qt5 Widgets
-target_link_libraries(MyQt5App PRIVATE Qt5::Widgets)
+target_link_libraries(toDoSystem
+        Qt5::Widgets
+        Qt5::Core
+        Qt5::Sql
+)
