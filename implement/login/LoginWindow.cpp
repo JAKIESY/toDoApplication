@@ -1,7 +1,7 @@
 #include "LoginWindow.h"
 #include "ui_loginwindow.h"
-#include "log/Logger.h"
-#include "utils/EnvPath.hpp"
+#include "../../log/Logger.h"
+#include "../../utils/EnvPath.h"
 #include <QPushButton>
 #include <QSqlQuery>
 #include <QSqlError>
@@ -11,7 +11,7 @@
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QLineEdit>
-#include "TodoWindow.h"
+#include "../../TodoWindow.h"
 
 LoginWindow::LoginWindow(QWidget *parent) : QWidget(parent), ui(new Ui::LoginWindow) {
     ui->setupUi(this);

@@ -1,8 +1,6 @@
 #include "TodoWindow.h"
 #include "ui_todo.h"
 #include <QFile>
-#include <QTextStream>
-#include <QMenuBar>
 #include <QToolBar>
 #include <QDockWidget>
 #include <QTextEdit>

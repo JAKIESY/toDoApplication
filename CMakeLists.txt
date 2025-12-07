@@ -6,6 +6,9 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
+# Ensure Qt UIC searches our UI folders (we moved UI files to data/UI)
+list(APPEND CMAKE_AUTOUIC_SEARCH_PATHS "${CMAKE_SOURCE_DIR}/data/UI" "${CMAKE_SOURCE_DIR}/implement/login")
+
 # Keep user's Qt5 prefix by default; users can override CMAKE_PREFIX_PATH if needed
 set(CMAKE_PREFIX_PATH "/opt/homebrew/opt/qt@5")
 
@@ -14,13 +17,13 @@ find_package(Qt5 COMPONENTS Core Widgets Test Sql REQUIRED)
 
 add_executable(toDoSystem
         main.cpp
-        LoginWindow.cpp
+        implement/login/LoginWindow.cpp
         TodoWindow.cpp
         log/Logger.cpp
-        loginwindow.ui
-        todo.ui
+        data/UI/loginwindow.ui
+        data/UI/todo.ui
         utils/EnvPath.cpp
-        utils/EnvPath.hpp
+        utils/EnvPath.h
 )
 
 target_link_libraries(toDoSystem
