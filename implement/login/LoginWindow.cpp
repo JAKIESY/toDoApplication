@@ -1,5 +1,6 @@
 #include "LoginWindow.h"
 #include "ui_loginwindow.h"
+#include "../todo/TodoWindow.h"
 #include "../../log/Logger.h"
 #include "../../utils/EnvPath.h"
 #include <QPushButton>
@@ -8,10 +9,7 @@
 #include <QDir>
 #include <QCryptographicHash>
 #include <QMessageBox>
-#include <QLabel>
-#include <QVBoxLayout>
 #include <QLineEdit>
-#include "../../TodoWindow.h"
 
 LoginWindow::LoginWindow(QWidget *parent) : QWidget(parent), ui(new Ui::LoginWindow) {
     ui->setupUi(this);
@@ -110,7 +108,6 @@ void LoginWindow::onLoginClicked() {
             todo->show();
 
             this->close();
-
         } else {
             Logger::error(QString("Invalid credentials for user %1").arg(user));
             QMessageBox::warning(this, "Login failed", "Invalid username or password.");
