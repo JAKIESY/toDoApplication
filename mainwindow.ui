@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+    <class>MainWindow</class>
+    <widget class="QMainWindow" name="MainWindow">
+        <property name="geometry">
+            <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>960</width>
+                <height>600</height>
+            </rect>
+        </property>
+        <property name="windowTitle">
+            <string>Qt5 + CLion IDE Layout</string>
+        </property>
+
+        <!-- 中央编辑区域 -->
+        <widget class="QWidget" name="centralwidget">
+            <layout class="QVBoxLayout" name="centralLayout">
+                <item>
+                    <widget class="QPlainTextEdit" name="editorArea">
+                        <property name="placeholderText">
+                            <string>// Main editor area</string>
+                        </property>
+                    </widget>
+                </item>
+            </layout>
+        </widget>
+
+        <!-- 顶部菜单栏 -->
+        <widget class="QMenuBar" name="menubar">
+            <property name="geometry">
+                <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>960</width>
+                    <height>22</height>
+                </rect>
+            </property>
+            <widget class="QMenu" name="menuFile">
+                <property name="title">
+                    <string>&amp;File</string>
+                </property>
+                <addaction name="actionNew"/>
+                <addaction name="actionOpen"/>
+                <addaction name="actionSave"/>
+                <addaction name="separator"/>
+                <addaction name="actionExit"/>
+            </widget>
+            <widget class="QMenu" name="menuEdit">
+                <property name="title">
+                    <string>&amp;Edit</string>
+                </property>
+                <addaction name="actionUndo"/>
+                <addaction name="actionRedo"/>
+            </widget>
+            <widget class="QMenu" name="menuView">
+                <property name="title">
+                    <string>&amp;View</string>
+                </property>
+                <addaction name="actionToggleLeftDock"/>
+                <addaction name="actionToggleRightDock"/>
+                <addaction name="actionToggleBottomDock"/>
+            </widget>
+            <widget class="QMenu" name="menuHelp">
+                <property name="title">
+                    <string>&amp;Help</string>
+                </property>
+                <addaction name="actionAbout"/>
+            </widget>
+            <addaction name="menuFile"/>
+            <addaction name="menuEdit"/>
+            <addaction name="menuView"/>
+            <addaction name="menuHelp"/>
+        </widget>
+
+        <!-- 工具栏（位于菜单栏下方） -->
+        <widget class="QToolBar" name="mainToolBar">
+            <property name="windowTitle">
+                <string>Main Toolbar</string>
+            </property>
+            <attribute name="toolBarArea">
+                <enum>TopToolBarArea</enum>
+            </attribute>
+            <attribute name="toolBarBreak">
+                <bool>false</bool>
+            </attribute>
+            <addaction name="actionNew"/>
+            <addaction name="actionOpen"/>
+            <addaction name="actionSave"/>
+            <addaction name="separator"/>
+            <addaction name="actionUndo"/>
+            <addaction name="actionRedo"/>
+        </widget>
+
+        <!-- 左侧栏：项目/文件树 -->
+        <widget class="QDockWidget" name="leftDock">
+            <property name="windowTitle">
+                <string>Project</string>
+            </property>
+            <attribute name="dockWidgetArea">
+                <!-- LeftDockWidgetArea = 1 -->
+                <number>1</number>
+            </attribute>
+            <widget class="QWidget" name="leftDockContents">
+                <layout class="QVBoxLayout" name="leftDockLayout">
+                    <item>
+                        <widget class="QTreeView" name="projectTreeView">
+                            <property name="headerHidden">
+                                <bool>false</bool>
+                            </property>
+                        </widget>
+                    </item>
+                </layout>
+            </widget>
+        </widget>
+
+        <!-- 右侧栏：工具窗口（可选） -->
+        <widget class="QDockWidget" name="rightDock">
+            <property name="windowTitle">
+                <string>Tool Windows</string>
+            </property>
+            <attribute name="dockWidgetArea">
+                <!-- RightDockWidgetArea = 2 -->
+                <number>2</number>
+            </attribute>
+            <widget class="QWidget" name="rightDockContents">
+                <layout class="QVBoxLayout" name="rightDockLayout">
+                    <item>
+                        <widget class="QListWidget" name="toolWindowList">
+                            <property name="sortingEnabled">
+                                <bool>false</bool>
+                            </property>
+                            <item>
+                                <property name="text">
+                                    <string>Search</string>
+                                </property>
+                            </item>
+                            <item>
+                                <property name="text">
+                                    <string>Structure</string>
+                                </property>
+                            </item>
+                            <item>
+                                <property name="text">
+                                    <string>TODO</string>
+                                </property>
+                            </item>
+                        </widget>
+                    </item>
+                </layout>
+            </widget>
+        </widget>
+
+        <!-- 底部：状态/输出面板 -->
+        <widget class="QDockWidget" name="bottomDock">
+            <property name="windowTitle">
+                <string>Output</string>
+            </property>
+            <attribute name="dockWidgetArea">
+                <!-- BottomDockWidgetArea = 8 -->
+                <number>8</number>
+            </attribute>
+            <widget class="QWidget" name="bottomDockContents">
+                <layout class="QVBoxLayout" name="bottomDockLayout">
+                    <item>
+                        <!-- Toolbar row: clear/copy/filter/search -->
+                        <widget class="QWidget" name="bottomToolRow">
+                            <layout class="QHBoxLayout" name="bottomToolLayout">
+                                <item>
+                                    <widget class="QPushButton" name="clearOutputButton">
+                                        <property name="text">
+                                            <string>Clear</string>
+                                        </property>
+                                        <property name="toolTip">
+                                            <string>Clear output</string>
+                                        </property>
+                                    </widget>
+                                </item>
+                                <item>
+                                    <widget class="QPushButton" name="copyOutputButton">
+                                        <property name="text">
+                                            <string>Copy</string>
+                                        </property>
+                                        <property name="toolTip">
+                                            <string>Copy selected or entire output</string>
+                                        </property>
+                                    </widget>
+                                </item>
+                                <item>
+                                    <widget class="QLabel" name="filterLabel">
+                                        <property name="text">
+                                            <string>Level:</string>
+                                        </property>
+                                    </widget>
+                                </item>
+                                <item>
+                                    <widget class="QComboBox" name="levelFilterCombo">
+                                        <item>
+                                            <property name="text">
+                                                <string>All</string>
+                                            </property>
+                                        </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>Info</string>
+                                            </property>
+                                        </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>Warning</string>
+                                            </property>
+                                        </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>Error</string>
+                                            </property>
+                                        </item>
+                                    </widget>
+                                </item>
+                                <item>
+                                    <spacer name="horizontalSpacer">
+                                        <property name="orientation">
+                                            <enum>Qt::Horizontal</enum>
+                                        </property>
+                                        <property name="sizeType">
+                                            <enum>QSizePolicy::Expanding</enum>
+                                        </property>
+                                        <property name="sizeHint">
+                                            <size>
+                                                <width>40</width>
+                                                <height>20</height>
+                                            </size>
+                                        </property>
+                                    </spacer>
+                                </item>
+                                <item>
+                                    <widget class="QLineEdit" name="outputSearch">
+                                        <property name="placeholderText">
+                                            <string>Search output...</string>
+                                        </property>
+                                    </widget>
+                                </item>
+                            </layout>
+                        </widget>
+                    </item>
+                    <item>
+                        <widget class="QTabWidget" name="outputTabs">
+                            <property name="tabPosition">
+                                <enum>QTabWidget::South</enum>
+                            </property>
+                            <widget class="QWidget" name="tabBuild">
+                                <attribute name="title">
+                                    <string>Build</string>
+                                </attribute>
+                                <layout class="QVBoxLayout" name="buildTabLayout">
+                                    <item>
+                                        <widget class="QPlainTextEdit" name="buildOutput">
+                                            <property name="readOnly">
+                                                <bool>true</bool>
+                                            </property>
+                                            <property name="placeholderText">
+                                                <string>// Build output</string>
+                                            </property>
+                                        </widget>
+                                    </item>
+                                </layout>
+                            </widget>
+                            <widget class="QWidget" name="tabRun">
+                                <attribute name="title">
+                                    <string>Run</string>
+                                </attribute>
+                                <layout class="QVBoxLayout" name="runTabLayout">
+                                    <item>
+                                        <widget class="QPlainTextEdit" name="runOutput">
+                                            <property name="readOnly">
+                                                <bool>true</bool>
+                                            </property>
+                                            <property name="placeholderText">
+                                                <string>// Application output</string>
+                                            </property>
+                                        </widget>
+                                    </item>
+                                </layout>
+                            </widget>
+                        </widget>
+                    </item>
+                </layout>
+            </widget>
+        </widget>
+
+        <!-- 状态栏 -->
+        <widget class="QStatusBar" name="statusbar"/>
+
+        <!-- 动作 (Actions) -->
+        <action name="actionNew">
+            <property name="text">
+                <string>&amp;New</string>
+            </property>
+            <property name="toolTip">
+                <string>Create new file</string>
+            </property>
+        </action>
+        <action name="actionOpen">
+            <property name="text">
+                <string>&amp;Open...</string>
+            </property>
+            <property name="toolTip">
+                <string>Open file</string>
+            </property>
+        </action>
+        <action name="actionSave">
+            <property name="text">
+                <string>&amp;Save</string>
+            </property>
+            <property name="toolTip">
+                <string>Save file</string>
+            </property>
+        </action>
+        <action name="actionExit">
+            <property name="text">
+                <string>E&amp;xit</string>
+            </property>
+        </action>
+        <action name="actionUndo">
+            <property name="text">
+                <string>&amp;Undo</string>
+            </property>
+        </action>
+        <action name="actionRedo">
+            <property name="text">
+                <string>&amp;Redo</string>
+            </property>
+        </action>
+        <action name="actionToggleLeftDock">
+            <property name="text">
+                <string>Toggle Left Sidebar</string>
+            </property>
+        </action>
+        <action name="actionToggleRightDock">
+            <property name="text">
+                <string>Toggle Right Sidebar</string>
+            </property>
+        </action>
+        <action name="actionToggleBottomDock">
+            <property name="text">
+                <string>Toggle Bottom Panel</string>
+            </property>
+        </action>
+        <action name="actionAbout">
+            <property name="text">
+                <string>&amp;About</string>
+            </property>
+        </action>
+    </widget>
+    <resources/>
+    <connections/>
+</ui>
