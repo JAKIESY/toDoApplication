@@ -10,14 +10,14 @@ class TodoWindow;
 class QDockWidget;
 class QTextEdit;
 
-class TodoWindow : public QMainWindow {
+class TodoWindow final : public QMainWindow {
     Q_OBJECT
 public:
     explicit TodoWindow(QWidget *parent = nullptr);
     ~TodoWindow() override;
 
     // Append text to console area
-    void appendToConsole(const QString &text);
+    void appendToConsole(const QString &text) const;
 
 private:
     Ui::TodoWindow *ui;

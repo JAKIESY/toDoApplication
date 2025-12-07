@@ -40,6 +40,6 @@ TodoWindow::~TodoWindow() {
     delete ui;
 }
 
-void TodoWindow::appendToConsole(const QString &text) {
+void TodoWindow::appendToConsole(const QString &text) const {
     if (m_consoleText) m_consoleText->append(text);
 }

@@ -9,10 +9,6 @@
 static QFile *g_logFile = nullptr;
 static QMutex g_logMutex;
 
-// Logger::Logger() {
-//     init();
-// }
-
 Logger::~Logger() {
     shutdown();
 }

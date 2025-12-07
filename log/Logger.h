@@ -5,8 +5,6 @@
 
 class Logger {
 public:
-    // Logger();
-
     ~Logger();
 
     // Initialize logger and install global message handler. Returns true on success.
@@ -20,8 +18,6 @@ public:
     static void debug(const QString &msg);
 
     static void info(const QString &msg);
-
-    static void warn(const QString &msg);
 
     static void error(const QString &msg);
 };

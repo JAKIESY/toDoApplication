@@ -19,14 +19,14 @@ set(CMAKE_PREFIX_PATH "/opt/homebrew/opt/qt@5")
 find_package(Qt5 COMPONENTS Core Widgets Test Sql REQUIRED)
 
 add_executable(toDoSystem
-        main.cpp
+        src.cpp
         implement/login/LoginWindow.cpp
         implement/todo/TodoWindow.cpp
-        log/Logger.cpp
         implement/UI/loginwindow.ui
         implement/UI/todo.ui
-        utils/EnvPath.cpp
-        utils/EnvPath.h
+        log/Logger.cpp
+        utils/env/EnvPath.cpp
+        utils/env/EnvPath.h
 )
 
 target_link_libraries(toDoSystem
